@@ -1,0 +1,58 @@
+from skimage.filters import frangi, hessian, sato, meijering
+import matplotlib.pyplot as plt
+import cv2
+import numpy as np
+
+# Default values for lowerbound = 2/255, upperbound = 0.05"
+#Output the neuritness of the cell image and images of the cells, the Meijering transformed image, 
+# and image quantifying neuriteness
+def countNeuriteIntensityMeijering(pathToFile, lowerbound, upperbound):
+
+    image =  cv2.imread(pathToFile)
+    image_m =  cv2.imread(pathToFile)
+
+    greyscale_m = cv2. cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+
+    dns_greyscale_m = cv2.fastNlMeansDenoising(greyscale_m)
+
+    meijering_filtered_image  = meijering(dns_greyscale_m, [1], black_ridges = True)
+
+    image_m[((meijering_filtered_image > lowerbound) & (meijering_filtered_image < upperbound))] = (255, 0, 0)
+
+    lower_red = np.array([255, 0, 0])
+    upper_red = np.array([255, 0, 0])
+
+
+    red_mask = cv2.inRange(image_m, lower_red, upper_red)
+
+
+    red_pixel_count = cv2.countNonZero(red_mask)
+
+    print('The relative neurite intensity is '+ str(red_pixel_count))
+
+    plt.figure(figsize=(10,5))
+    plt.subplot(1, 3, 1)
+    plt.imshow(image, cmap='gray')
+    plt.title('Original Image')
+    plt.axis('off')
+
+# Display the filtered image
+    plt.subplot(1, 3, 2)
+    plt.imshow(meijering_filtered_image, cmap='gray')
+    plt.title('Meijering-Filtered Image')
+    plt.axis('off')
+
+# Display the filtered image
+    plt.subplot(1, 3, 3)
+    plt.imshow(image_m, cmap='gray')
+    plt.title('Neuriteness')
+    plt.axis('off')
+
+    plt.show()
+
+    return red_pixel_count
+
+countNeuriteIntensityMeijering('/Users/stevensu/Downloads/images/livecell_train_val_images/MCF7_Phase_G4_2_03d16h00m_4.tif', 2/255, 0.05)
+
+
