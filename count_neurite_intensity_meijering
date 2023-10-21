@@ -52,6 +52,6 @@ def countNeuriteIntensityMeijering(pathToFile, lowerbound, upperbound):
 
     return red_pixel_count
 
-countNeuriteIntensityMeijering('/Users/stevensu/Downloads/images/livecell_train_val_images/MCF7_Phase_G4_2_03d16h00m_4.tif', 2/255, 0.05)
+countNeuriteIntensityMeijering('../SHSY5Y_Rep1/MCF7_Phase_G4_2_03d16h00m_4.tif', 2/255, 0.05)
 
 
