@@ -13,7 +13,6 @@ def countNeuriteIntensityMeijering(pathToFile, lowerbound, upperbound):
 
     greyscale_m = cv2. cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-
     dns_greyscale_m = cv2.fastNlMeansDenoising(greyscale_m)
 
     meijering_filtered_image  = meijering(dns_greyscale_m, [1], black_ridges = True)
