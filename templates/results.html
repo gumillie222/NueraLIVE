@@ -2,9 +2,55 @@
 <html>
 <head>
     <title>Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 100px); /* Adjust the height as needed */
+        }
+        .header {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 100%;
+        }
+        .header h1 {
+            color: #007BFF;
+        }
+        .results {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 100%;
+        }
+        .results img {
+            max-width: 50%; /* Each image takes 50% of the container width */
+        }
+    </style>
 </head>
 <body>
-    <h1>Results</h1>
-    <img src="{{ url_for('static', filename='cell_count.png') }}" alt="Cell Count Graph">
+    <div class="container">
+        <div class="header">
+            <h1>Results</h1>
+        </div>
+        <div class="results">
+            <img src="{{ url_for('static', filename='cell_count_1.png') }}" alt="Cell Count Graph 1">
+            <img src="{{ url_for('static', filename='cell_count_2.png') }}" alt="Cell Count Graph 2">
+        </div>
+    </div>
 </body>
 </html>
